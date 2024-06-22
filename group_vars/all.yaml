@@ -2,4 +2,6 @@
 
 consul_version: "1.19.0"
 consul_binary_download: true
+consul_ui: true
 consul_ssl: false
+consul_acl: false
