@@ -16,9 +16,21 @@ encrypt = "{{ consul_gossip_encrypt }}"
 
 log_level = "{{ consul_log_lvl }}"
 
+{% if consul_ui %}
+
 ui_config {
   enabled = true
 }
+
+{% endif %}
+
+{% if consul_acl %}
+
+acl {
+    enabled = true
+}
+
+{% endif %}
 
 {% if consul_ssl %}
 
