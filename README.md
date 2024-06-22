@@ -28,7 +28,9 @@
 * `consul_key_path` path for key
 * `consul_binary_download` download and unpackage distr or skip download and unpackage task [true/false]
 * `consul_cluster_helthcheck` perform helthcheck after cluster is up or skip helthcheck task [true/false]
+* `consul_ui` enable or disable consul UI [true/false]
 * `consul_ssl` use ssl (https) or not [true/false]
+* `consul_acl` use acl or not [true/false]
 * `consul_log_lvl` log level `"WARN"` by default
 
 ### How to
