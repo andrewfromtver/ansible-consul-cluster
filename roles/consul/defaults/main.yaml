@@ -5,6 +5,9 @@ consul_zip_download_url: "https://releases.hashicorp.com/consul/{{ consul_versio
 
 consul_datacenter: "consul_dc"
 consul_domain: "example.com"
+ 
+# define var for complete command with --check arg (actual value set in "Set fact with gossip encryption key" task)
+consul_gossip_encrypt: ""
 
 consul_bind_address: "{{ ansible_default_ipv4.address }}"
 
