@@ -1,0 +1,23 @@
+[Unit]
+Description=Consul agent
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User={{ consul_user }}
+Group={{ consul_group }}
+ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+# Hardening for security
+ProtectSystem=full
+ProtectHome=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

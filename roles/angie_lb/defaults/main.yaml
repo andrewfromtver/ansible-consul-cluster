@@ -1,0 +1,6 @@
+---
+
+angie_repo_url: "https://download.angie.software/angie/oracle/$releasever/"
+angie_repo_gpg: "https://angie.software/keys/angie-signing.gpg.asc"
+
+consul_ssl: true

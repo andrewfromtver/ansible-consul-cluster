@@ -1,0 +1,7 @@
+---
+
+- name: restart Angie service
+  systemd:
+    name: angie
+    state: restarted
+    enabled: yes

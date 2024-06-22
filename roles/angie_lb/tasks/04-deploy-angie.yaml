@@ -1,0 +1,14 @@
+---
+
+- name: Install Angie package
+  yum:
+    name: angie
+    state: present
+  become: yes
+
+- name: Start and enable Angie service
+  ansible.builtin.systemd:
+    name: angie
+    enabled: yes
+    state: started
+  become: yes

@@ -1,0 +1,27 @@
+---
+
+consul_version: "1.19.0"
+consul_zip_download_url: "https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip"
+
+consul_datacenter: "consul_dc"
+consul_domain: "example.com"
+
+consul_bind_address: "{{ ansible_default_ipv4.address }}"
+
+consul_user: "consul"
+consul_group: "consul"
+
+consul_bin_dir: "/usr/local/bin"
+consul_data_dir: "/var/lib/consul"
+consul_config_dir: "/etc/consul.d"
+
+consul_ca_path: "/path/to/consul-ca.pem"
+consul_cert_path: "/path/to/consul-cert.pem"
+consul_key_path: "/path/to/consul-key.pem"
+
+consul_binary_download: true
+consul_cluster_helthcheck: true
+
+consul_ssl: true
+
+consul_log_lvl: "WARN"

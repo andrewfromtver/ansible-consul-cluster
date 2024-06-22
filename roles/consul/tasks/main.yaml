@@ -1,0 +1,8 @@
+---
+
+  - include_tasks: tasks/01-download-binary.yaml
+  - include_tasks: tasks/02-generate-gossip-key.yaml
+  - include_tasks: tasks/03-copy-tls-certs.yaml
+  - include_tasks: tasks/04-deploy-consul.yaml
+  - meta: flush_handlers
+  - include_tasks: tasks/05-helthcheck.yaml

@@ -1,0 +1,60 @@
+---
+
+- name: Create consul group
+  ansible.builtin.group:
+    name: "{{ consul_group }}"
+    state: present
+  become: yes
+
+- name: Create consul user
+  ansible.builtin.user:
+    name: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    state: present
+    system: yes
+  become: yes
+
+- name: Create Consul data directory
+  ansible.builtin.file:
+    path: "{{ consul_data_dir }}"
+    state: directory
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: "0750"
+  become: yes
+
+- name: Create Consul config directory
+  ansible.builtin.file:
+    path: "{{ consul_config_dir }}"
+    state: directory
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: "0750"
+  become: yes
+
+- name: Deploy Consul configuration file
+  ansible.builtin.template:
+    src: "consul.hcl.j2"
+    dest: "{{ consul_config_dir }}/consul.hcl"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: "0640"
+  notify: restart Consul service
+  become: yes
+
+- name: Deploy systemd service file
+  ansible.builtin.template:
+    src: "consul.service.j2"
+    dest: "/etc/systemd/system/consul.service"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: "0644"
+  notify: restart Consul service and reload systemd
+  become: yes
+
+- name: Start and enable Consul service
+  ansible.builtin.systemd:
+    name: consul
+    enabled: yes
+    state: started
+  become: yes

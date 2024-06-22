@@ -1,0 +1,25 @@
+---
+
+- name: Copy CA certificate file to remote host
+  copy:
+    src: "ssl/ca.crt"
+    dest: "/etc/ssl/ca.crt"
+    owner: "angie"
+    group: "angie"
+    mode: "0644"
+
+- name: Copy certificate file to remote host
+  copy:
+    src: "ssl/ssl.crt"
+    dest: "/etc/ssl/ssl.crt"
+    owner: "angie"
+    group: "angie"
+    mode: "0644"
+
+- name: Copy private key file to remote host
+  copy:
+    src: "ssl/ssl.key"
+    dest: "/etc/ssl/ssl.key"
+    owner: "angie"
+    group: "angie"
+    mode: "0400"

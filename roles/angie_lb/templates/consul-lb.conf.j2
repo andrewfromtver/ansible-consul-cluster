@@ -1,0 +1,37 @@
+upstream consul {
+
+    least_conn;
+
+    {% for host in groups['consul_cluster'] %}
+
+    {% if consul_ssl %}
+    server {{ hostvars[host]['ansible_host'] }}:8501;
+    {% else %}
+    server {{ hostvars[host]['ansible_host'] }}:8500;
+    {% endif %}
+
+    {% endfor %}
+
+}
+
+server {
+
+    {% if consul_ssl %}
+    listen 8501 ssl;
+    ssl_certificate /etc/ssl/ssl.crt;
+    ssl_certificate_key /etc/ssl/ssl.key;
+    {% else %}
+    listen 8500;
+    {% endif %}
+
+    location / {
+
+        {% if consul_ssl %}
+        proxy_pass https://consul;
+        {% else %}
+        proxy_pass http://consul;
+        {% endif %}
+
+    }
+
+}

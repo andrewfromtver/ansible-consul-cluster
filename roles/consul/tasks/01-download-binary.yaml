@@ -1,0 +1,27 @@
+---
+
+- name: Download Consul binary zip archive
+  ansible.builtin.get_url:
+    url: "{{ consul_zip_download_url }}"
+    dest: "/tmp/consul.zip"
+    mode: "0644"
+    force: yes
+  when: consul_binary_download
+
+- name: Unzip Consul binary
+  ansible.builtin.unarchive:
+    src: "/tmp/consul.zip"
+    dest: "{{ consul_bin_dir }}"
+    remote_src: yes
+  become: yes
+  when: consul_binary_download
+
+- name: Set permissions for Consul binary
+  ansible.builtin.file:
+    path: "{{ consul_bin_dir }}/consul"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: "0755"
+  notify: restart Consul service
+  become: yes
+  when: consul_binary_download

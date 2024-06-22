@@ -1,0 +1,19 @@
+---
+
+- name: Verify Consul service is running on HTTP
+  uri:
+    url: "http://{{ ansible_default_ipv4.address }}:8500/v1/status/leader"
+    method: GET
+    status_code: 200
+  when: consul_cluster_helthcheck and not consul_ssl
+
+- name: Verify Consul service is running on HTTPS
+  uri:
+    url: "https://{{ ansible_default_ipv4.address }}:8501/v1/status/leader"
+    method: GET
+    client_cert: "/etc/ssl/cert.pem"
+    client_key: "/etc/ssl//key.pem"
+    ca_path: "/etc/ssl/ca.pem"
+    validate_certs: no
+    status_code: 200
+  when: consul_cluster_helthcheck and consul_ssl

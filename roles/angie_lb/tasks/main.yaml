@@ -1,0 +1,6 @@
+---
+
+  - include_tasks: 01-setup-angie-repo.yaml
+  - include_tasks: 02-copy-tls-certs.yaml
+  - include_tasks: 03-setup-consul-lb.yaml
+  - include_tasks: 04-deploy-angie.yaml

@@ -1,0 +1,11 @@
+---
+
+- name: Add Angie repository
+  yum_repository:
+    name: Angie
+    description: Angie repository
+    baseurl: "{{ angie_repo_url }}"
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: "{{ angie_repo_gpg }}"
+  become: yes

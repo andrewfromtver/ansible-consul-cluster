@@ -1,0 +1,8 @@
+---
+
+  - name: Deploy Angie configuration file
+    template:
+      src: consul-lb.conf.j2
+      dest: /etc/angie/http.d/angie.conf
+      mode: '0644'
+    notify: restart Angie service
