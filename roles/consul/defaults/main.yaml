@@ -1,7 +1,7 @@
 ---
 
 consul_version: "1.19.0"
-consul_zip_download_url: "https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip"
+consul_zip_download_url: "https://ftp.yandex.ru/mirrors/releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip"
 
 consul_datacenter: "consul_dc"
 consul_domain: "example.com"

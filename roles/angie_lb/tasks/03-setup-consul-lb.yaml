@@ -1,4 +1,9 @@
 ---
+  - name: Ensure the Angie HTTP configuration directory exists
+    ansible.builtin.file:
+      path: /etc/angie/http.d
+      state: directory
+      mode: '0755'
 
   - name: Deploy Angie configuration file
     template:

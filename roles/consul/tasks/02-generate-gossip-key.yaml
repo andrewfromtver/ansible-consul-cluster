@@ -11,6 +11,14 @@
   run_once: true
   when: not gossip_key_file.stat.exists
 
+- name: Ensure the Consul configuration directory exists
+  ansible.builtin.file:
+    path: /etc/consul.d
+    state: directory
+    owner: consul
+    group: consul
+    mode: '0755'
+
 - name: Store gossip encryption key
   copy:
     content: "{{ consul_gossip_keygen_output.stdout }}"

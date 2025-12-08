@@ -1,7 +1,7 @@
 ---
 
 - name: Install Angie package
-  yum:
+  ansible.builtin.package:
     name: angie
     state: present
   become: yes

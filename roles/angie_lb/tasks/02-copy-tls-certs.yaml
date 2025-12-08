@@ -7,6 +7,7 @@
     owner: "angie"
     group: "angie"
     mode: "0644"
+  when: consul_ssl
 
 - name: Copy certificate file to remote host
   copy:
@@ -15,6 +16,7 @@
     owner: "angie"
     group: "angie"
     mode: "0644"
+  when: consul_ssl
 
 - name: Copy private key file to remote host
   copy:
@@ -23,3 +25,4 @@
     owner: "angie"
     group: "angie"
     mode: "0400"
+  when: consul_ssl

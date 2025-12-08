@@ -8,6 +8,19 @@
     force: yes
   when: consul_binary_download
 
+- name: Ensure unzip is installed (for Debian/Ubuntu based systems)
+  ansible.builtin.apt:
+    name: unzip
+    state: present
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure unzip is installed (for RedHat/CentOS based systems)
+  ansible.builtin.yum:
+    name: unzip
+    state: present
+  when: ansible_os_family == 'RedHat'
+
 - name: Unzip Consul binary
   ansible.builtin.unarchive:
     src: "/tmp/consul.zip"
@@ -15,6 +28,19 @@
     remote_src: yes
   become: yes
   when: consul_binary_download
+
+- name: Create consul group
+  ansible.builtin.group:
+    name: consul
+    state: present
+
+- name: Create consul user
+  ansible.builtin.user:
+    name: consul
+    comment: "Consul System User"
+    group: consul
+    shell: /bin/false
+    create_home: false
 
 - name: Set permissions for Consul binary
   ansible.builtin.file:

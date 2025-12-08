@@ -1,8 +1,10 @@
 ---
 
-angie_repo_url: "https://download.angie.software/angie/oracle/$releasever/"
-angie_repo_gpg: "https://angie.software/keys/angie-signing.gpg.asc"
+angie_repo_url_redhat: "https://download.angie.software/angie/oracle/$releasever/"
+angie_repo_url_debian: "https://download.angie.software/angie/ubuntu/22.04 jammy"
+angie_repo_gpg_redhat: "https://angie.software/keys/angie-signing.gpg.asc"
+angie_repo_gpg_debian: "https://angie.software/keys/angie-signing.gpg"
 
-consul_ssl: true
+consul_ssl: false
 
 angie_lb_helthcheck: true
