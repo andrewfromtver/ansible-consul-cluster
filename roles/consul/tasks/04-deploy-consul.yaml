@@ -49,7 +49,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     mode: "0644"
-  notify: restart Consul service and reload systemd
+  notify: restart Consul service and reload Systemd
   become: yes
 
 - name: Start and enable Consul service
