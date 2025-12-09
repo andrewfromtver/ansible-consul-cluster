@@ -4,7 +4,7 @@
   ansible.builtin.group:
     name: "{{ consul_group }}"
     state: present
-  become: yes
+  become: true
 
 - name: Create consul user
   ansible.builtin.user:
@@ -12,7 +12,7 @@
     group: "{{ consul_group }}"
     state: present
     system: yes
-  become: yes
+  become: true
 
 - name: Create Consul data directory
   ansible.builtin.file:
@@ -21,7 +21,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     mode: "0750"
-  become: yes
+  become: true
 
 - name: Create Consul config directory
   ansible.builtin.file:
@@ -30,7 +30,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     mode: "0750"
-  become: yes
+  become: true
 
 - name: Deploy Consul configuration file
   ansible.builtin.template:
@@ -40,7 +40,7 @@
     group: "{{ consul_group }}"
     mode: "0640"
   notify: restart Consul service
-  become: yes
+  become: true
 
 - name: Deploy systemd service file
   ansible.builtin.template:
@@ -50,11 +50,11 @@
     group: "{{ consul_group }}"
     mode: "0644"
   notify: restart Consul service and reload Systemd
-  become: yes
+  become: true
 
 - name: Start and enable Consul service
   ansible.builtin.systemd:
     name: consul
     enabled: yes
     state: started
-  become: yes
+  become: true
