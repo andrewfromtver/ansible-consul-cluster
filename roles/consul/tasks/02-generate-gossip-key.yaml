@@ -3,6 +3,7 @@
 - name: Check if Consul gossip encryption key exists
   stat:
     path: "{{ consul_config_dir }}/consul_gossip_key"
+  run_once: true
   register: gossip_key_file
 
 - name: Generate gossip encryption key if it doesn't exist
@@ -18,6 +19,7 @@
     owner: consul
     group: consul
     mode: '0755'
+  run_once: true
 
 - name: Store gossip encryption key
   copy:
@@ -26,6 +28,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     mode: 0600
+  run_once: true
   when: not gossip_key_file.stat.exists
 
 - name: Read stored gossip encryption key
@@ -33,9 +36,11 @@
   register: cat_output
   changed_when: false
   failed_when: false
+  run_once: true
   when: gossip_key_file.stat.exists
 
 - name: Set fact with gossip encryption key
   set_fact:
     consul_gossip_encrypt: "{{ cat_output.stdout }}"
-  when: cat_output is defined and cat_output.stdout
+  run_once: true
+  when: cat_output is defined and cat_output.stdout is defined
