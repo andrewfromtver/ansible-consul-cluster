@@ -1,4 +1,5 @@
 ---
+
   - name: Ensure the Angie HTTP configuration directory exists
     ansible.builtin.file:
       path: /etc/angie/http.d

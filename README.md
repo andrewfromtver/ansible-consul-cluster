@@ -42,9 +42,9 @@
 
 some examples of run playbook command
 
-* `ansible-playbook -i inventory.ini play.yaml --ask-pass --ask-become-pass` to promt root password
-* `ansible-playbook -i inventory.ini play.yaml --ask-pass --ask-become-pass --extra-vars "consul_version=1.18.2"` to promt root + become password and set var (downgrade Consul version for example)
-* `ansible-playbook -i inventory.ini play.yaml --ask-pass --ask-become-pass --extra-vars '{"consul_binary_download": false, "consul_ssl": true}'` to promt root + become password and set boolean vars values in JSON format
+* `ansible-playbook -i inventory.ini play.yaml --user=root --fork=3` to run playbook with 3 forks (maximum speed for 3 nodes cluster)
+* `ansible-playbook -i inventory.ini play.yaml --user=root --fork=3 --extra-vars "consul_version=1.18.2"` to set var (downgrade Consul version for example)
+* `ansible-playbook -i inventory.ini play.yaml --user=root --fork=3 --extra-vars '{"consul_binary_download": false, "consul_ssl": true}'` to set boolean vars values in JSON format
 
 **WARN**
 

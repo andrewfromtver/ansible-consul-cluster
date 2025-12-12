@@ -1,13 +1,11 @@
 ---
 
 - hosts: consul_cluster
-  become: yes
   gather_facts: yes
   roles:
     - consul
 
 - hosts: angie_lb
-  become: yes
   gather_facts: yes
   roles:
     - angie_lb

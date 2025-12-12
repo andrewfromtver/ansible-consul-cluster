@@ -1,6 +1,6 @@
 ---
 
-- name: Add Angie repository
+- name: Add Angie repository (RedHat)
   yum_repository:
     name: Angie
     description: Angie repository
@@ -8,18 +8,17 @@
     gpgcheck: yes
     enabled: yes
     gpgkey: "{{ angie_repo_gpg_redhat }}"
-  become: yes
   when: ansible_os_family == 'RedHat'
 
-- name: Download the Angie GPG signing key
+- name: Download the Angie GPG signing key (Ubuntu)
   ansible.builtin.get_url:
-    url: "{{ angie_repo_gpg_debian }}"
+    url: "{{ angie_repo_gpg_ubuntu }}"
     dest: /usr/share/keyrings/angie-keyring.gpg
     mode: '0644'
   when: ansible_os_family == 'Debian'
 
-- name: Add Angie repository (Debian/Ubuntu)
+- name: Add Angie repository (Ubuntu)
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/usr/share/keyrings/angie-keyring.gpg] {{ angie_repo_url_debian }} main"
+    repo: "deb [signed-by=/usr/share/keyrings/angie-keyring.gpg] {{ angie_repo_url_ubuntu }} main"
     state: present
   when: ansible_os_family == 'Debian'

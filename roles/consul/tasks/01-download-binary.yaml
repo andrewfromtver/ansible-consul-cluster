@@ -8,14 +8,14 @@
     force: yes
   when: consul_binary_download
 
-- name: Ensure unzip is installed (for Debian/Ubuntu based systems)
+- name: Ensure unzip is installed (Ubuntu)
   ansible.builtin.apt:
     name: unzip
     state: present
     update_cache: true
   when: ansible_os_family == 'Debian'
 
-- name: Ensure unzip is installed (for RedHat/CentOS based systems)
+- name: Ensure unzip is installed (RedHat)
   ansible.builtin.yum:
     name: unzip
     state: present
@@ -26,7 +26,6 @@
     src: "/tmp/consul.zip"
     dest: "{{ consul_bin_dir }}"
     remote_src: yes
-  become: true
   when: consul_binary_download
 
 - name: Create consul group
@@ -49,5 +48,4 @@
     group: "{{ consul_group }}"
     mode: "0755"
   notify: restart Consul service
-  become: true
   when: consul_binary_download
